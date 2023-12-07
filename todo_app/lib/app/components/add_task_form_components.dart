@@ -30,13 +30,23 @@ class AddTaskFormComponent extends StatelessWidget {
     formController.changeEndHour(time);
   }
 
+  String? defaultValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Campo Obrigatório';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
       key: formController.formKey,
       child: Column(children: [
         TextFieldWidget(
-            controller: formController.titleController, label: 'Titulo'),
+          controller: formController.titleController,
+          label: 'Titulo',
+          validator: defaultValidator,
+        ),
         const SizedBox(
           height: 20,
         ),
@@ -45,6 +55,7 @@ class AddTaskFormComponent extends StatelessWidget {
           label: 'Descrição',
           maxLines: 3,
           keyboardType: TextInputType.multiline,
+          validator: defaultValidator,
         ),
         const SizedBox(
           height: 20,
@@ -57,6 +68,7 @@ class AddTaskFormComponent extends StatelessWidget {
           label: 'Data',
           readOnly: true,
           onTap: () => datePicker(context),
+          validator: defaultValidator,
         ),
         Row(
           children: [
@@ -65,6 +77,7 @@ class AddTaskFormComponent extends StatelessWidget {
                 controller: formController.initHourController,
                 label: 'Hora inicial',
                 onTap: () => initTimePicker(context),
+                validator: defaultValidator,
               ),
             ),
             const SizedBox(
@@ -75,6 +88,7 @@ class AddTaskFormComponent extends StatelessWidget {
                 controller: formController.endHourController,
                 label: 'Hora final',
                 onTap: () => endTimePicker(context),
+                validator: defaultValidator,
               ),
             ),
           ],
@@ -82,7 +96,8 @@ class AddTaskFormComponent extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        ElevatedButton(onPressed: () {}, child: const Text('Adicionar')),
+        ElevatedButton(
+            onPressed: formController.add, child: const Text('Adicionar')),
       ]),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/app/controllers/form_controller.dart';
 import 'package:todo_app/app/widgets/text_field_widget.dart';
 
 import '../components/add_task_form_components.dart';
@@ -14,7 +15,9 @@ class AddTaskPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(20),
-        child: AddTaskFormComponent(),
+        child: AddTaskFormComponent(
+          formController: FormController(),
+        ),
       ),
     );
   }

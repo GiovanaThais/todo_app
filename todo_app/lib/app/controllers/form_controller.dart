@@ -16,6 +16,12 @@ class FormController {
   late final initHourController;
   late final endHourController;
 
+  Future<void> add() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+    print('add');
+  }
+
   void changeDate(DateTime newDate) {
     dateController.text = newDate.toString();
   }
