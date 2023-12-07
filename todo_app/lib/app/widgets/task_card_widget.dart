@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/app/widgets/task_done_widget.dart';
 
 class TaskCardWidget extends StatelessWidget {
   const TaskCardWidget(
@@ -46,16 +47,22 @@ class TaskCardWidget extends StatelessWidget {
                         style: theme.textTheme.titleLarge?.copyWith(
                           decoration: titleDecoration,
                         )),
+                    const SizedBox(
+                      height: 8,
+                    ),
                     Text(
                       description,
                       style: theme.textTheme.bodyMedium,
                     )
                   ],
                 ),
-                Icon(Icons.add),
+                TakeDoneWidget(isDone: isDone),
               ],
             ),
-            const Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: const Divider(),
+            ),
             const Text.rich(TextSpan(children: [
               TextSpan(text: 'Today   '),
               TextSpan(text: '10:00 PM - 11:45 PM')
