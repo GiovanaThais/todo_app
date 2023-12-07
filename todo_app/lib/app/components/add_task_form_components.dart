@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/app/controllers/form_controller.dart';
 
 import '../widgets/text_field_widget.dart';
 
 class AddTaskFormComponent extends StatelessWidget {
   const AddTaskFormComponent({
     super.key,
+    required this.formController,
   });
-  void datePicker(BuildContext context) {
+
+  final FormController formController;
+
+  Future<void> datePicker(BuildContext context) async {
     final now = DateTime.now();
-    showDatePicker(
+    final date = await showDatePicker(
         context: context,
         initialDate: now,
         firstDate: now,
         lastDate: now.add(const Duration(days: 30)));
+    if (date == null) return;
+    formController.changeDate(date);
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       child: Column(children: [
-        TextFieldWidget(controller: TextEditingController(), label: 'Titulo'),
+        TextFieldWidget(
+            controller: formController.titleController, label: 'Titulo'),
         const SizedBox(
           height: 20,
         ),
         TextFieldWidget(
-          controller: TextEditingController(),
+          controller: formController.descriptionController,
           label: 'Descrição',
           maxLines: 3,
           keyboardType: TextInputType.multiline,
@@ -36,7 +44,7 @@ class AddTaskFormComponent extends StatelessWidget {
           height: 20,
         ),
         TextFieldWidget(
-          controller: TextEditingController(),
+          controller: formController.dateController,
           label: 'Data',
           readOnly: true,
           onTap: () => datePicker(context),
@@ -45,7 +53,7 @@ class AddTaskFormComponent extends StatelessWidget {
           children: [
             Expanded(
               child: TextFieldWidget(
-                controller: TextEditingController(),
+                controller: formController.initHourController,
                 label: 'Hora inicial',
               ),
             ),
@@ -54,7 +62,7 @@ class AddTaskFormComponent extends StatelessWidget {
             ),
             Expanded(
               child: TextFieldWidget(
-                controller: TextEditingController(),
+                controller: formController.endHourController,
                 label: 'Hora final',
               ),
             ),
