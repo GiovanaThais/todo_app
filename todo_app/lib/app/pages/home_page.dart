@@ -36,12 +36,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: Column(
           children: [
-            HeaderWidget(
-                onAddTap: () {
-                  navigateToForm();
-                },
-                subtitle: 'Hoje',
-                title: 'Tarefas de Hoje'),
+            HeaderWidget(onAddTap: navigateToForm, title: '', subtitle: ''),
             const SizedBox(
               height: 20,
             ),

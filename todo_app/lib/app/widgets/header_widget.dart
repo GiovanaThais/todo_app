@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/theme/light/light_colors.dart';
 
-class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({super.key});
+import '../pages/add_task_page.dart';
+
+class HeaderWidget extends StatefulWidget {
+  const HeaderWidget(
+      {super.key,
+      required Function() onAddTap,
+      required String subtitle,
+      required String title});
+
+  @override
+  State<HeaderWidget> createState() => _HeaderWidgetState();
+}
+
+class _HeaderWidgetState extends State<HeaderWidget> {
+  void navigateToForm() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) {
+          return const AddTaskPage();
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +35,7 @@ class HeaderWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Today's Task",
+              "Tarefas de hoje",
               style: theme.textTheme.titleLarge
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
@@ -22,13 +43,13 @@ class HeaderWidget extends StatelessWidget {
               height: 4,
             ),
             Text(
-              'Date',
+              'Hoje',
               style: theme.textTheme.bodySmall,
             ),
           ],
         ),
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: navigateToForm,
           label: Text('Nova Tarefa'),
           icon: Icon(Icons.add),
         ),
