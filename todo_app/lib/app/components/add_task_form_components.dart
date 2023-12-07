@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/controllers/form_controller.dart';
+import 'package:todo_app/app/core/shared/utils/app_pickers.dart';
 
 import '../widgets/text_field_widget.dart';
 
@@ -12,19 +13,27 @@ class AddTaskFormComponent extends StatelessWidget {
   final FormController formController;
 
   Future<void> datePicker(BuildContext context) async {
-    final now = DateTime.now();
-    final date = await showDatePicker(
-        context: context,
-        initialDate: now,
-        firstDate: now,
-        lastDate: now.add(const Duration(days: 30)));
+    final date = await AppPickers.appDatePicker(context);
     if (date == null) return;
     formController.changeDate(date);
+  }
+
+  Future<void> initTimePicker(BuildContext context) async {
+    final time = await AppPickers.appTimePicker(context);
+    if (time == null) return;
+    formController.changeInitHour(time);
+  }
+
+  Future<void> endTimePicker(BuildContext context) async {
+    final time = await AppPickers.appTimePicker(context);
+    if (time == null) return;
+    formController.changeEndHour(time);
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formController.formKey,
       child: Column(children: [
         TextFieldWidget(
             controller: formController.titleController, label: 'Titulo'),
@@ -55,6 +64,7 @@ class AddTaskFormComponent extends StatelessWidget {
               child: TextFieldWidget(
                 controller: formController.initHourController,
                 label: 'Hora inicial',
+                onTap: () => initTimePicker(context),
               ),
             ),
             const SizedBox(
@@ -64,6 +74,7 @@ class AddTaskFormComponent extends StatelessWidget {
               child: TextFieldWidget(
                 controller: formController.endHourController,
                 label: 'Hora final',
+                onTap: () => endTimePicker(context),
               ),
             ),
           ],

@@ -19,4 +19,12 @@ class FormController {
   void changeDate(DateTime newDate) {
     dateController.text = newDate.toString();
   }
+
+  void changeInitHour(TimeOfDay newDate) {
+    initHourController.text = newDate.toString();
+  }
+
+  void changeEndHour(TimeOfDay newDate) {
+    endHourController.text = newDate.toString();
+  }
 }
