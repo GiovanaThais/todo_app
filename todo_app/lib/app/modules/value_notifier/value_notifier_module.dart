@@ -5,9 +5,9 @@ import 'package:todo_app/app/modules/value_notifier/store/date_vn_store.dart';
 
 class valueNotifierModule extends Module {
   @override
-  final List<Bind<Object>> binds = [
-    Bind.lazySingleton((i) => DateVnStore()),
-  ];
+  void binds(i) {
+    i.addLazySingleton((i) => DateVnStore());
+  }
 
   @override
   void routes(r) {
