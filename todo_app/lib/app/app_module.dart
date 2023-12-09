@@ -6,10 +6,10 @@ import 'package:todo_app/app/modules/value_notifier/value_notifier_module.dart';
 class AppModule extends Module {
   @override
   void routes(r) {
-    ModuleRoute(
+    r.module(
       '/home',
       module: HomeModule(),
     );
-    ModuleRoute('/vn', module: valueNotifierModule());
+    r.module('/vn', module: valueNotifierModule());
   }
 }
