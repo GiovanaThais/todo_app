@@ -10,6 +10,6 @@ class AppModule extends Module {
       '/home',
       module: HomeModule(),
     );
-    r.module('/vn', module: valueNotifierModule());
+    r.module('/vn', module: ValueNotifierModule());
   }
 }
