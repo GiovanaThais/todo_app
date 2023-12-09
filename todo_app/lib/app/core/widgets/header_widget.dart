@@ -1,30 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/app/theme/light/light_colors.dart';
+import 'package:todo_app/app/core/theme/light/light_colors.dart';
 
-import '../pages/add_task_page.dart';
+import '../../modules/value_notifier/pages/add_task_vn_page.dart';
 
 class HeaderWidget extends StatefulWidget {
   const HeaderWidget(
       {super.key,
-      required Function() onAddTap,
-      required String subtitle,
-      required String title});
+      required this.onAddTap,
+      required this.subtitle,
+      required this.title});
+
+  final void Function() onAddTap;
+  final String title;
+  final String subtitle;
 
   @override
   State<HeaderWidget> createState() => _HeaderWidgetState();
 }
 
 class _HeaderWidgetState extends State<HeaderWidget> {
-  void navigateToForm() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) {
-          return const AddTaskPage();
-        },
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -35,7 +29,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Tarefas de hoje",
+              widget.title,
               style: theme.textTheme.titleLarge
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
@@ -43,13 +37,13 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               height: 4,
             ),
             Text(
-              'Hoje',
+              widget.subtitle,
               style: theme.textTheme.bodySmall,
             ),
           ],
         ),
         ElevatedButton.icon(
-          onPressed: navigateToForm,
+          onPressed: widget.onAddTap,
           label: Text('Nova Tarefa'),
           icon: Icon(Icons.add),
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/app/controllers/form_controller.dart';
+import 'package:todo_app/app/core/controllers/form_controller.dart';
 import 'package:todo_app/app/core/shared/utils/app_pickers.dart';
 
-import '../widgets/text_field_widget.dart';
+import '../core/widgets/text_field_widget.dart';
 
 class AddTaskFormComponent extends StatelessWidget {
   const AddTaskFormComponent({
@@ -41,7 +41,7 @@ class AddTaskFormComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: formController.formKey,
-      child: Column(children: [
+      child: ListView(children: [
         TextFieldWidget(
           controller: formController.titleController,
           label: 'Titulo',
@@ -96,8 +96,10 @@ class AddTaskFormComponent extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        ElevatedButton(
-            onPressed: formController.add, child: const Text('Adicionar')),
+        Center(
+          child: ElevatedButton(
+              onPressed: formController.add, child: const Text('Adicionar')),
+        ),
       ]),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/app/core/shared/utils/app_formatters.dart';
 
 class FormController {
   FormController() {
@@ -23,14 +24,17 @@ class FormController {
   }
 
   void changeDate(DateTime newDate) {
-    dateController.text = newDate.toString();
+    final value = AppFormatters.completeDay(newDate);
+    dateController.text = value;
   }
 
-  void changeInitHour(TimeOfDay newDate) {
-    initHourController.text = newDate.toString();
+  void changeInitHour(TimeOfDay newTime) {
+    final value = AppFormatters.formatHour(newTime);
+    initHourController.text = value;
   }
 
-  void changeEndHour(TimeOfDay newDate) {
-    endHourController.text = newDate.toString();
+  void changeEndHour(TimeOfDay newTime) {
+    final value = AppFormatters.formatHour(newTime);
+    endHourController.text = value;
   }
 }

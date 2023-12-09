@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/app/theme/color_extension.dart';
-import 'package:todo_app/app/theme/light/light_colors.dart';
+import 'package:todo_app/app/core/theme/color_extension.dart';
+import 'package:todo_app/app/core/theme/light/light_colors.dart';
 
 class LightTheme {
   static final theme = ThemeData(
       iconTheme: IconThemeData(color: Colors.black),
       appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(0, 209, 56, 168),
+          backgroundColor: Color.fromARGB(0, 189, 49, 152),
           titleTextStyle: TextStyle(
               color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500)),
       dividerColor: Color.fromRGBO(198, 87, 150, 1),

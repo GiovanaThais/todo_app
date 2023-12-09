@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todo_app/app/components/filter_list_components.dart';
 import 'package:todo_app/app/components/task_list_components.dart';
 import 'package:todo_app/app/core/shared/utils/app_formatters.dart';
 import 'package:todo_app/app/modules/value_notifier/pages/add_task_vn_page.dart';
-import '../core/widgets/header_widget.dart';
+import '../../../core/widgets/header_widget.dart';
 import 'package:todo_app/app/core/widgets/home_app_bar_widget.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeVnPage extends StatefulWidget {
+  const HomeVnPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeVnPage> createState() => _HomeVnPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeVnPageState extends State<HomeVnPage> {
   void navigateToForm() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) {
-          return const AddTaskVnPage();
-        },
-      ),
-    );
+    Modular.to.pushNamed('add'); //rota: /vn/add
+
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (_) {
+    //       return const AddTaskVnPage();
+    //     },
+    //   ),
+    // );
   }
 
   String get headerTitle {

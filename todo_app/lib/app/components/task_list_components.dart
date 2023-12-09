@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/task_card_widget.dart';
+import '../core/widgets/task_card_widget.dart';
 
 class TaskListComponent extends StatelessWidget {
   const TaskListComponent({super.key});
@@ -12,8 +12,8 @@ class TaskListComponent extends StatelessWidget {
           return TaskCardWidget(
             isDone: index.isEven,
             description: 'Description $index',
-            endDate: DateTime.now(),
-            initialDate: DateTime.now(),
+            endDate: DateTime.now().add(Duration(minutes: index * 3)),
+            initialDate: DateTime.now().add(Duration(days: index)),
             onTap: () {},
             title: 'Title $index',
           );

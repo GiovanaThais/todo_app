@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/app/theme/color_extension.dart';
+import 'package:todo_app/app/core/theme/color_extension.dart';
 
 class FilterItemWidget extends StatelessWidget {
   const FilterItemWidget({

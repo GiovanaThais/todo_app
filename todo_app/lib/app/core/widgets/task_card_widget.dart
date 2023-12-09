@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/app/widgets/task_done_widget.dart';
+import 'package:todo_app/app/core/shared/utils/app_formatters.dart';
+import 'package:todo_app/app/core/widgets/task_done_widget.dart';
 
 class TaskCardWidget extends StatelessWidget {
   const TaskCardWidget(
@@ -24,6 +25,16 @@ class TaskCardWidget extends StatelessWidget {
     } else {
       return TextDecoration.none;
     }
+  }
+
+  String get initHour =>
+      AppFormatters.formatHour(TimeOfDay.fromDateTime(initialDate));
+  String get endHour =>
+      AppFormatters.formatHour(TimeOfDay.fromDateTime(endDate));
+  String get dayMessage {
+    final message = AppFormatters.dayMessage(initialDate);
+
+    return message ?? AppFormatters.onlyDays(initialDate);
   }
 
   @override
@@ -63,9 +74,9 @@ class TaskCardWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: const Divider(),
             ),
-            const Text.rich(TextSpan(children: [
-              TextSpan(text: 'Today   '),
-              TextSpan(text: '10:00 PM - 11:45 PM')
+            Text.rich(TextSpan(children: [
+              TextSpan(text: '$dayMessage   '),
+              TextSpan(text: '$initHour - $endHour')
             ]))
           ],
         ),
