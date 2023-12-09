@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/app/core/shared/utils/app_pickers.dart';
 
 typedef TapDateCallback = void Function(DateTime);
 
@@ -18,6 +19,14 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
+  Future<void> openDatePicker(BuildContext context) async {
+    final date = await AppPickers.appDatePicker(context);
+
+    if (date == null) return;
+
+    onTitleTap(date);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,9 +38,7 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             onPressed: onPreviousTap,
           ),
           GestureDetector(
-            onTap: () {
-              onTitleTap(DateTime.now());
-            },
+            onTap: () => openDatePicker(context),
             child: title,
           ),
           IconButton(
