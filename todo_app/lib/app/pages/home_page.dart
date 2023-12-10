@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 20,
             ),
-            const FilterListComponents(),
+            //const FilterListComponents(),
             const SizedBox(
               height: 20,
             ),

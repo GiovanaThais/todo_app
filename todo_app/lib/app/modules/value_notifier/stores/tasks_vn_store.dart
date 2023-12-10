@@ -1,21 +1,62 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/core/models/task_model.dart';
+import 'package:todo_app/app/modules/value_notifier/stores/states/tasks_state.dart';
 
-class TaskVnStore extends ValueNotifier<List<TaskModel>> {
-  TaskVnStore() : super([]);
+class TaskVnStore extends ValueNotifier<TasksState> {
+  TaskVnStore() : super(TasksState.initialState());
 
   Future<void> getTasks(DateTime date) async {
-    final tasks = List.generate(5, (index) {
+    final random = Random();
+    final tasks = List.generate(50, (index) {
+      final now = DateTime.now();
+      final initialDate = now.add(Duration(days: random.nextInt(25) - 1));
       return TaskModel(
         id: index,
         title: 'Title $index',
         description: 'Description $index',
-        initialDate: date,
-        endDate: date.add(Duration(minutes: index * 5)),
+        initialDate: initialDate,
+        endDate: initialDate.add(Duration(minutes: index * 2)),
         isDone: index.isEven,
-        status: taskStatus.values[index % 3],
+        status: TaskStatus.values[index % 3],
       );
     });
-    value = tasks;
+    value = value.copyWith(allTasks: tasks, tasksStatus: value.tasksStatus);
+    filterTasksByDate(date);
+  }
+
+  void filterTasksByDate(DateTime date) {
+    final tasks = value.allTasks;
+    final dateToFilter = _resetHour(date);
+
+    final newCurrentTasks = tasks.where((element) {
+      final initial = _resetHour(element.initialDate);
+      return initial.isAtSameMomentAs(dateToFilter);
+    }).toList();
+
+    value = value.copyWith(
+        tasksStatus: value.tasksStatus,
+        currentDateTasks: newCurrentTasks,
+        filteredTasks: newCurrentTasks);
+  }
+
+  void clearStatusFilter() {
+    value = value.copyWith(filteredTasks: value.currentDateTasks);
+  }
+
+  void filterTasksByStatus(TaskStatus status) {
+    final tasks = value.currentDateTasks;
+
+    final filteredTasks = tasks.where((element) {
+      return element.status == status;
+    }).toList();
+
+    value = value.copyWith(tasksStatus: status, filteredTasks: filteredTasks);
+  }
+
+  DateTime _resetHour(DateTime date) {
+    return date.copyWith(
+        hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
   }
 }

@@ -32,7 +32,7 @@ class _HomeVnPageState extends State<HomeVnPage> {
   }
 
   void reloadTasksOnDateChange() {
-    tasksStore.getTasks(dateStore.value);
+    tasksStore.filterTasksByDate(dateStore.value);
   }
 
   @override
@@ -99,7 +99,9 @@ class _HomeVnPageState extends State<HomeVnPage> {
             const SizedBox(
               height: 20,
             ),
-            const FilterListComponents(),
+            FilterListComponents(
+              taskVnStore: tasksStore,
+            ),
             const SizedBox(
               height: 20,
             ),

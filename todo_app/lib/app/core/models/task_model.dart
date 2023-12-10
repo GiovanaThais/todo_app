@@ -1,4 +1,4 @@
-enum taskStatus { open, closed, archived }
+enum TaskStatus { open, closed, archived }
 
 class TaskModel {
   const TaskModel(
@@ -16,5 +16,5 @@ class TaskModel {
   final DateTime initialDate;
   final DateTime endDate;
   final bool isDone;
-  final taskStatus status;
+  final TaskStatus status;
 }

@@ -14,12 +14,12 @@ class TaskListComponent extends StatelessWidget {
         valueListenable: taskVnStore,
         builder: (_, tasks, __) {
           return ListView.separated(
-            itemCount: tasks.length,
+            itemCount: tasks.filteredTasks.length,
             separatorBuilder: (_, __) => const SizedBox(
               height: 8,
             ),
             itemBuilder: (_, index) {
-              final task = tasks.elementAt(index);
+              final task = tasks.filteredTasks.elementAt(index);
               return TaskCardWidget(
                 isDone: task.isDone,
                 description: task.description,
