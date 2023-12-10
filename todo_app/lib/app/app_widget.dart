@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:todo_app/app/modules/value_notifier/pages/home_vn_page.dart';
 import 'package:todo_app/app/core/theme/app_theme.dart';
 
 class AppWidget extends StatelessWidget {

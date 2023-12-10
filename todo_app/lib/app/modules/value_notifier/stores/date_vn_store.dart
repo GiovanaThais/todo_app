@@ -8,7 +8,7 @@ class DateVnStore extends ValueNotifier<DateTime> {
   }
 
   void previousDate() {
-    value = value.add(const Duration(days: 1));
+    value = value.subtract(const Duration(days: 1));
   }
 
   void changeDate(DateTime newDate) {

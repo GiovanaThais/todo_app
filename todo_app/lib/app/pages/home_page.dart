@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/components/filter_list_components.dart';
 import 'package:todo_app/app/components/task_list_components.dart';
+import 'package:todo_app/app/core/models/task_model.dart';
 import 'package:todo_app/app/core/shared/utils/app_formatters.dart';
 import 'package:todo_app/app/modules/value_notifier/pages/add_task_vn_page.dart';
+import 'package:todo_app/app/modules/value_notifier/stores/tasks_vn_store.dart';
 import '../core/widgets/header_widget.dart';
 import 'package:todo_app/app/core/widgets/home_app_bar_widget.dart';
 
@@ -64,7 +66,10 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 20,
             ),
-            Expanded(child: const TaskListComponent()),
+            //Expanded(
+            //child: TaskListComponent(
+            //taskVnStore: tasksStore,
+            //)),
           ],
         ),
       ),
