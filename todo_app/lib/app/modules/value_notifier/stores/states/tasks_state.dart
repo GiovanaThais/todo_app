@@ -44,3 +44,24 @@ class TasksState {
     );
   }
 }
+
+class ErrorTasksVnState extends TasksState {
+  const ErrorTasksVnState(this.message)
+      : super(
+          allTasks: const [],
+          filteredTasks: const [],
+          currentDateTasks: const [],
+          tasksStatus: null,
+        );
+  final String message;
+}
+
+class LoadingTasksVnState extends TasksState {
+  LoadingTasksVnState()
+      : super(
+          allTasks: [],
+          filteredTasks: [],
+          currentDateTasks: [],
+          tasksStatus: null,
+        );
+}

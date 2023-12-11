@@ -8,22 +8,34 @@ class TaskVnStore extends ValueNotifier<TasksState> {
   TaskVnStore() : super(TasksState.initialState());
 
   Future<void> getTasks(DateTime date) async {
-    final random = Random();
-    final tasks = List.generate(50, (index) {
-      final now = DateTime.now();
-      final initialDate = now.add(Duration(days: random.nextInt(25) - 1));
-      return TaskModel(
-        id: index,
-        title: 'Title $index',
-        description: 'Description $index',
-        initialDate: initialDate,
-        endDate: initialDate.add(Duration(minutes: index * 2)),
-        isDone: index.isEven,
-        status: TaskStatus.values[index % 3],
-      );
-    });
-    value = value.copyWith(allTasks: tasks, tasksStatus: value.tasksStatus);
-    filterTasksByDate(date);
+    value = LoadingTasksVnState();
+
+    await Future.delayed(const Duration(seconds: 3));
+
+    //value = ErrorTasksVnState('Error'); //simulação de mensagem de erro
+
+    //await Future.delayed(const Duration(seconds: 3));
+    try {
+      final random = Random();
+
+      final tasks = List.generate(50, (index) {
+        final now = DateTime.now();
+        final initialDate = now.add(Duration(days: random.nextInt(25) - 1));
+        return TaskModel(
+          id: index,
+          title: 'Title $index',
+          description: 'Description $index',
+          initialDate: initialDate,
+          endDate: initialDate.add(Duration(minutes: index * 2)),
+          isDone: index.isEven,
+          status: TaskStatus.values[index % 3],
+        );
+      });
+      value = value.copyWith(allTasks: tasks, tasksStatus: value.tasksStatus);
+      filterTasksByDate(date);
+    } catch (e) {
+      value = ErrorTasksVnState(e.toString());
+    }
   }
 
   void filterTasksByDate(DateTime date) {
