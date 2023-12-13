@@ -27,6 +27,8 @@ class LightTheme {
         ColorExtension(
             doneBackgroundColor: LightColors.deeppink,
             focusedBadgeColor: LightColors.purple,
-            unfocusedBadgeColor: LightColors.lightPurple)
+            unfocusedBadgeColor: LightColors.lightPurple,
+            shimmerBaseColor: Colors.grey.shade200,
+            shimmerHighLightColor: Colors.grey.shade300)
       ]);
 }
