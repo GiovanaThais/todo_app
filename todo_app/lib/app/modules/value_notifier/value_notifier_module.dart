@@ -12,9 +12,12 @@ class ValueNotifierModule extends Module {
   void binds(i) {
     i.addLazySingleton(() => DateVnStore());
     i.addLazySingleton(() => TaskVnStore());
-    i.add(() => AddTaskVnStore(false));
+    i.add(() => AddTaskVnStore());
     i.add(() => FormVnController(
-        addTaskVnStore: i(), taskVnStore: i(), dateVnStore: i()));
+        addTaskVnStore: i(),
+        taskVnStore: i(),
+        dateVnStore: i(),
+        overlayService: i()));
   }
 
   @override

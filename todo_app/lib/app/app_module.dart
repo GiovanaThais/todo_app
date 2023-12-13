@@ -1,8 +1,18 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:todo_app/app/core/services/asuka_overlay_service.dart';
+import 'package:todo_app/app/core/services/i_overlay_service.dart';
 import 'package:todo_app/app/modules/home/home_module.dart';
 import 'package:todo_app/app/modules/value_notifier/value_notifier_module.dart';
 
 class AppModule extends Module {
+  @override
+  void binds(Injector i) {
+    i.addLazySingleton<IOverlayService>(
+      (i) => AsukaOverLayService(),
+      onDispose: (value) => value.dispose(),
+    );
+  }
+
   @override
   void routes(r) {
     r.module(

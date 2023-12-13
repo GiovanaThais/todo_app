@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/core/models/task_model.dart';
-import 'package:todo_app/app/modules/value_notifier/stores/states/tasks_state.dart';
+import 'package:todo_app/app/modules/value_notifier/stores/states/tasks_vn_state.dart';
 
 class TaskVnStore extends ValueNotifier<TasksState> {
   TaskVnStore() : super(TasksState.initialState());
