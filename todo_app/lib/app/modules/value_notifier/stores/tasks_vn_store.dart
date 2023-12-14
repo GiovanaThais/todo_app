@@ -2,10 +2,47 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/core/models/task_model.dart';
+import 'package:todo_app/app/core/repositories/task_repository.dart';
 import 'package:todo_app/app/modules/value_notifier/stores/states/tasks_vn_state.dart';
 
 class TaskVnStore extends ValueNotifier<TasksState> {
-  TaskVnStore() : super(TasksState.initialState());
+  TaskVnStore(this.repository) : super(TasksState.initialState());
+
+  final TaskRepository repository;
+
+  Future<void> doneTask(TaskModel task) async {
+    late TaskStatus newStatus;
+
+    if (task.status == TaskStatus.closed) {
+      newStatus = TaskStatus.open;
+    } else {
+      newStatus = TaskStatus.closed;
+    }
+    final newTask = task.copyWith(status: newStatus, isDone: !task.isDone);
+
+    await repository.updateTasks(newTask);
+
+    await getTasks(task.initialDate);
+  }
+
+  Future<void> archiveTask(TaskModel task) async {
+    late TaskStatus newStatus;
+
+    if (task.status == TaskStatus.archived) {
+      if (task.isDone) {
+        newStatus = TaskStatus.closed;
+      } else {
+        newStatus = TaskStatus.open;
+      }
+    } else {
+      newStatus = TaskStatus.archived;
+    }
+
+    final newTask = task.copyWith(status: newStatus);
+    await repository.updateTasks(newTask);
+
+    await getTasks(task.initialDate);
+  }
 
   Future<void> getTasks(DateTime date) async {
     value = LoadingTasksVnState();
@@ -16,21 +53,22 @@ class TaskVnStore extends ValueNotifier<TasksState> {
 
     //await Future.delayed(const Duration(seconds: 3));
     try {
-      final random = Random();
+      // final random = Random();
 
-      final tasks = List.generate(50, (index) {
-        final now = DateTime.now();
-        final initialDate = now.add(Duration(days: random.nextInt(25) - 1));
-        return TaskModel(
-          id: index,
-          title: 'Title $index',
-          description: 'Description $index',
-          initialDate: initialDate,
-          endDate: initialDate.add(Duration(minutes: index * 2)),
-          isDone: index.isEven,
-          status: TaskStatus.values[index % 3],
-        );
-      });
+      // final tasks = List.generate(50, (index) {
+      //   final now = DateTime.now();
+      //   final initialDate = now.add(Duration(days: random.nextInt(25) - 1));
+      //   return TaskModel(
+      //     id: index,
+      //     title: 'Title $index',
+      //     description: 'Description $index',
+      //     initialDate: initialDate,
+      //     endDate: initialDate.add(Duration(minutes: index * 2)),
+      //     isDone: index.isEven,
+      //     status: TaskStatus.values[index % 3],
+      //   );
+      // });
+      final tasks = await repository.getTasks();
       value = value.copyWith(allTasks: tasks, tasksStatus: value.tasksStatus);
       filterTasksByDate(date);
     } catch (e) {

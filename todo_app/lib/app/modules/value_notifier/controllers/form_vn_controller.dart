@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:todo_app/app/core/modules/value_notifier/pages/add_task_page.dart';
-import 'package:todo_app/app/core/services/i_overlay_service.dart';
+import 'package:todo_app/app/core/services/overlay/i_overlay_service.dart';
 import 'package:todo_app/app/modules/value_notifier/stores/add_task_vn_store.dart';
 import 'package:todo_app/app/modules/value_notifier/stores/date_vn_store.dart';
 import 'package:todo_app/app/modules/value_notifier/stores/tasks_vn_store.dart';
@@ -30,7 +30,7 @@ class FormVnController extends FormController {
   Future<void> save(AddTaskParam param) async {
     _overlayService.show();
 
-    await addTaskVnStore.add(param as AddTaskPage); //rever
+    await addTaskVnStore.add(param);
 
     if (addTaskVnStore.isSuccess) {
       _dateVnStore.changeDate(param.initialDate);

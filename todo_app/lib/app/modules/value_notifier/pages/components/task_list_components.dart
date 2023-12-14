@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:todo_app/app/core/theme/color_extension.dart';
-import 'package:todo_app/app/modules/value_notifier/stores/states/tasks_state.dart';
+import 'package:todo_app/app/modules/value_notifier/stores/states/tasks_vn_state.dart';
 import 'package:todo_app/app/modules/value_notifier/stores/tasks_vn_store.dart';
 
-import '../core/widgets/task_card_widget.dart';
+import '../../../../core/widgets/task_card_widget.dart';
 
 class TaskListComponent extends StatelessWidget {
   const TaskListComponent({super.key, required this.taskVnStore});
@@ -51,12 +51,14 @@ class TaskListComponent extends StatelessWidget {
             itemBuilder: (_, index) {
               final task = state.filteredTasks.elementAt(index);
               return TaskCardWidget(
+                key: ValueKey('${task.id}-${task.status.name}'),
                 isDone: task.isDone,
                 description: task.description,
                 initialDate: task.initialDate,
                 endDate: task.endDate,
-                onTap: () {},
                 title: task.title,
+                onTap: () => taskVnStore.doneTask(task),
+                onDismiss: () => taskVnStore.archiveTask(task),
               );
             },
           );

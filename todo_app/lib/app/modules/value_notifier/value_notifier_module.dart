@@ -11,8 +11,8 @@ class ValueNotifierModule extends Module {
   @override
   void binds(i) {
     i.addLazySingleton(() => DateVnStore());
-    i.addLazySingleton(() => TaskVnStore());
-    i.add(() => AddTaskVnStore());
+    i.addLazySingleton(() => TaskVnStore(i()));
+    i.add(() => AddTaskVnStore(i()));
     i.add(() => FormVnController(
         addTaskVnStore: i(),
         taskVnStore: i(),

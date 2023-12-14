@@ -10,6 +10,17 @@ class TaskModel {
       required this.isDone,
       required this.status});
 
+  factory TaskModel.fromMap(Map<String, dynamic> map) {
+    return TaskModel(
+        id: map['id'],
+        title: map['title'],
+        description: map['description'],
+        initialDate: DateTime.fromMillisecondsSinceEpoch(map['initialDate']),
+        endDate: DateTime.fromMillisecondsSinceEpoch(map['endDate']),
+        isDone: map['isDone'],
+        status: TaskStatus.values.byName(map['status']));
+  }
+
   final int id;
   final String title;
   final String description;
@@ -17,4 +28,36 @@ class TaskModel {
   final DateTime endDate;
   final bool isDone;
   final TaskStatus status;
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'title': title,
+      'description': description,
+      'initialDate': initialDate,
+      'endDate': endDate,
+      'isDone': isDone,
+      'status': status.name,
+    };
+  }
+
+  TaskModel copyWith({
+    int? id,
+    String? title,
+    String? description,
+    DateTime? initialDate,
+    DateTime? endDate,
+    bool? isDone,
+    TaskStatus? status,
+  }) {
+    return TaskModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      initialDate: initialDate ?? this.initialDate,
+      endDate: endDate ?? this.endDate,
+      isDone: isDone ?? this.isDone,
+      status: status ?? this.status,
+    );
+  }
 }

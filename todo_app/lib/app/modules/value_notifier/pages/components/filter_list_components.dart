@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:todo_app/app/core/models/task_model.dart';
 
-import '../core/widgets/filter_item_widget.dart';
-import '../modules/value_notifier/stores/tasks_vn_store.dart';
+import '../../../../core/widgets/filter_item_widget.dart';
+import '../../stores/tasks_vn_store.dart';
 
 class FilterListComponents extends StatelessWidget {
   const FilterListComponents({super.key, required this.taskVnStore});
