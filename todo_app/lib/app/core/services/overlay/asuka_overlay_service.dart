@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
