@@ -8,6 +8,8 @@ import 'package:todo_app/app/core/services/overlay/i_overlay_service.dart';
 class AsukaOverLayService implements IOverlayService {
   OverlayEntry? _entry;
 
+  AsukaOverLayService(param0);
+
   @override
   Future<void> hide() async {
     if (_entry == null) return;

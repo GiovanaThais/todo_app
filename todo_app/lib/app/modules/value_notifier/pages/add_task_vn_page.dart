@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/app/core/controllers/form_controller.dart';
 import 'package:todo_app/app/core/widgets/text_field_widget.dart';
 
-import '../../../components/add_task_form_components.dart';
+import '../../../core/components/add_task_form_components.dart';
 import '../controllers/form_vn_controller.dart';
 
 class AddTaskVnPage extends StatelessWidget {

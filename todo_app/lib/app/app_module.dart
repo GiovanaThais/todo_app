@@ -9,10 +9,9 @@ import 'package:todo_app/app/modules/value_notifier/value_notifier_module.dart';
 class AppModule extends Module {
   @override
   void binds(Injector i) {
-    i.addLazySingleton<IOverlayService>(
-      (i) => AsukaOverLayService(),
-      onDispose: (value) => value.dispose(),
-    );
+    i.addLazySingleton<IOverlayService>((i) => AsukaOverLayService(i()),
+        config: BindConfig(onDispose: (value) => value.dispose()));
+
     i.addLazySingleton((i) => TaskRepository(i()));
     i.addSingleton((i) => HiveLocalStorageService());
   }

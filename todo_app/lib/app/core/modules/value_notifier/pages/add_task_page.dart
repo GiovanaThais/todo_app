@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/core/controllers/form_controller.dart';
 
-import '../../../../components/add_task_form_components.dart';
+import '../../../components/add_task_form_components.dart';
 
 class AddTaskPage extends StatelessWidget {
   const AddTaskPage({super.key, required this.controller});
